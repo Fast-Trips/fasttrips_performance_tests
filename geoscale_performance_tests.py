@@ -83,8 +83,9 @@ if __name__ == "__main__":
                                             test_sets[set_num]["levels"]):
     
         run_config     = os.path.join(base_dir,"config_ft.txt") 
-        pathweights    = os.path.join(base_dir,"pathweights_ft.csv") 
-        inputs         = os.path.join(base_dir,inp)
+        pathweights    = os.path.join(base_dir,"pathweights_ft.txt") 
+        network_inputs = os.path.join(base_dir,"network")
+        demand_inputs  = os.path.join(base_dir,inp)
         output_folder  = "out%s_%s_%s" % (inp,proc,lev)
         
         run_count += 1
@@ -92,15 +93,15 @@ if __name__ == "__main__":
         if args.norun:
             print "RUN SETTINGS"
             print "Processors: %d" % (proc)
-            print "Input Dir:  %s" % (inputs)
+            print "Demand Input Dir:  %s" % (demand_inputs)
             print "Level Settings:\n", levels[lev]
             print "Input Level: %s" % (inp)
             print "out folder %s\n" % (output_folder)
         
         else:
             from fasttrips import Run
-            Run.run_fasttrips(input_network_dir= inputs,
-                              input_demand_dir = inputs,
+            Run.run_fasttrips(input_network_dir= network_inputs,
+                              input_demand_dir = demand_inputs,
                               run_config       = run_config,
                               input_weights    = pathweights,
                               output_dir       = base_dir,
