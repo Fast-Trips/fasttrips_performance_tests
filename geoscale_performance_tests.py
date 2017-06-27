@@ -105,6 +105,7 @@ if __name__ == "__main__":
                               run_config       = run_config,
                               input_weights    = pathweights,
                               output_dir       = base_dir,
+                              iters            = 1,
                               output_folder    = output_folder,
                               number_of_processes    = proc,
                               dispersion             = levels[lev]["disp"],
