@@ -15,7 +15,7 @@ levels = {
         "disp"          : 0.2,
         "transfer_fare_ignore_pathfinding"  : True,
         "transfer_fare_ignore_pathenum"     : True,      
-        "overlap"       :'none',
+        "overlap"       :'None',
         "overlap_split" : False,
         "max_revisit"   : 1,
         "dt"            : 15,
@@ -99,23 +99,26 @@ if __name__ == "__main__":
             print "out folder %s\n" % (output_folder)
         
         else:
-            from fasttrips import Run
-            Run.run_fasttrips(input_network_dir= network_inputs,
-                              input_demand_dir = demand_inputs,
-                              run_config       = run_config,
-                              input_weights    = pathweights,
-                              output_dir       = base_dir,
-                              iters            = 1,
-                              output_folder    = output_folder,
-                              number_of_processes    = proc,
-                              dispersion             = levels[lev]["disp"],
-                              overlap_split_transit  = levels[lev]["overlap_split"],
-                              overlap_variable       = levels[lev]["overlap"],
-                              max_stop_process_count = levels[lev]["max_revisit"],
-                              time_window            = levels[lev]["dt"],
-                              transfer_fare_ignore_pathfinding = levels[lev]["transfer_fare_ignore_pathfinding"],
-                              transfer_fare_ignore_pathenum = levels[lev]["transfer_fare_ignore_pathenum"], 
-                              )
+            if os.path.exists(output_folder):
+                print "Path exists [%s] -- skipping" % output_folder
+            else:
+                from fasttrips import Run
+                Run.run_fasttrips(input_network_dir= network_inputs,
+                                  input_demand_dir = demand_inputs,
+                                  run_config       = run_config,
+                                  input_weights    = pathweights,
+                                  output_dir       = base_dir,
+                                  iters            = 1,
+                                  output_folder    = output_folder,
+                                  number_of_processes    = proc,
+                                  dispersion             = levels[lev]["disp"],
+                                  overlap_split_transit  = levels[lev]["overlap_split"],
+                                  overlap_variable       = levels[lev]["overlap"],
+                                  max_stop_process_count = levels[lev]["max_revisit"],
+                                  time_window            = levels[lev]["dt"],
+                                  transfer_fare_ignore_pathfinding = levels[lev]["transfer_fare_ignore_pathfinding"],
+                                  transfer_fare_ignore_pathenum = levels[lev]["transfer_fare_ignore_pathenum"], 
+                                  )
 
     if args.norun:
         print "TOTAL RUNS: %d" % (run_count)
